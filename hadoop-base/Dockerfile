@@ -32,8 +32,8 @@ RUN su hduser -c "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
 ADD config/ssh_config ./ssh_config
 RUN mv ./ssh_config /home/hduser/.ssh/config
 
-RUN wget http://apache.mirror.anlx.net/hadoop/core/hadoop-2.3.0/hadoop-2.3.0-src.tar.gz 
-RUN tar -xvf hadoop-2.3.0-src.tar.gz  
+RUN wget http://apache.mirror.anlx.net/hadoop/core/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz 
+RUN tar -xvf hadoop-2.6.0-src.tar.gz  
 
 
 RUN wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz  
@@ -45,11 +45,11 @@ RUN cd protobuf-2.5.0 && make install
 RUN cd protobuf-2.5.0 && ldconfig  
 RUN protoc --version  
 #ENV MAVEN_OPTS -Xms512m -XX:MaxPermSize=256 -Xmx512m
-RUN cd hadoop-2.3.0-src && mvn package -Pdist,native -DskipTests -Dtar  
+RUN cd hadoop-2.6.0-src && mvn package -Pdist,native -DskipTests -Dtar  
 
-RUN  cd hadoop-2.3.0-src && tar -xvf hadoop-dist/target/hadoop-2.3.0.tar.gz -C /usr/local/  
-RUN ln -s /usr/local/hadoop-2.3.0 /usr/local/hadoop  
-RUN chown -R hduser:hadoop /usr/local/hadoop-2.3.0
+RUN  cd hadoop-2.6.0-src && tar -xvf hadoop-dist/target/hadoop-2.6.0.tar.gz -C /usr/local/  
+RUN ln -s /usr/local/hadoop-2.6.0 /usr/local/hadoop  
+RUN chown -R hduser:hadoop /usr/local/hadoop-2.6.0
 
 ADD config/bashrc /home/hduser/.bashrc
 
