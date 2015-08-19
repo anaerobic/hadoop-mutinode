@@ -32,6 +32,7 @@ RUN su hduser -c "cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
 ADD config/ssh_config ./ssh_config
 RUN mv ./ssh_config /home/hduser/.ssh/config
 RUN chmod 600 /home/hduser/.ssh/config
+RUN cp /home/hduser/.ssh/config /etc/ssh/ssh_config
 
 RUN wget http://apache.mirror.anlx.net/hadoop/core/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz 
 RUN tar -xvf hadoop-2.6.0-src.tar.gz  
